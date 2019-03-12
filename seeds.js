@@ -5,7 +5,7 @@ const Comment = require("./models/comment");
 const data = [
     {
         name: "Kvalvika's Beach",
-        image: "https://images.unsplash.com/photo-1502954819424-7ed05cf95b43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1502954819424-7ed05cf95b43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
         description: "Located in an isolated bay on the northern side of Moskenesøy and only reached by foot, Kvalvika feels as though it could be at the edge of the world, not an easy hour’s walk. Here turquoise waves crash on golden sands and vertical cliffs rise into the clouds in a display of Lofoten at its best. While quite popular as a day hike, Kvalvika is also a wonderful camping location, as most people leave in the late afternoon and you’ll have the place mostly to yourself. And why not go take a swim under the midnight sun and then sit by a campfire late into the night?"
     },
     {
