@@ -25,6 +25,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function (req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+})
+
 app.use(express.static(__dirname + "/public"))
 mongoose.connect("mongodb://localhost:27017/yelpcamp", { useNewUrlParser: true });
 app.set("view engine", "ejs");
@@ -38,12 +43,13 @@ app.get("/", (req, res) => {
 
 // INDEX - show all campgrounds
 app.get("/campgrounds", (req, res) => {
+    console.log(req.user);
     // GET all campgrounds from database
     Campground.find({}, (err, campgrounds) => {
         if (err) {
             console.log(err);
         } else {
-            res.render("campgrounds/index", { campgrounds });
+            res.render("campgrounds/index", { campgrounds, currentUser: req.user });
         }
     })
 });
