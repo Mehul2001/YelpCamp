@@ -110,8 +110,5 @@ function checkCampgroundOwnership(req, res, next) {
     } else {
         res.redirect("back");
     }
-    //otherwise redirect
-    //else redirect him 
-
 }
 module.exports = router;
