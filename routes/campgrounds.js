@@ -17,15 +17,16 @@ router.get("/", (req, res) => {
 
 
 // CREATE - Add a new campground to db
-router.post("/", (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
     const name = req.body.name;
+    const price = req.body.price;
     const image = req.body.image;
     const description = req.body.description;
     const author = {
         id: req.user._id,
         username: req.user.username
     }
-    const newCampground = { name: name, image: image, description: description, author: author };
+    const newCampground = { name: name, price: price, image: image, description: description, author: author };
     //Create a new campground and save to DB
     // campgrounds.push(newCampground);
     Campground.create(newCampground, (err, newlyCreated) => {
@@ -43,11 +44,12 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 })
 
 //SHOW - shows more info about one capground
-router.get("/:id", middleware.isLoggedIn, (req, res) => {
+router.get("/:id", (req, res) => {
     // find the campground with provided ID
     Campground.findById(req.params.id).populate("comments").exec((err, campgrounds) => {
-        if (err) {
-            console.log(err);
+        if (err || !campgrounds) {
+            req.flash("error", "Campground not found");
+            return res.redirect("back");
         } else {
             console.log("found campground");
             // render the show template with that campground
